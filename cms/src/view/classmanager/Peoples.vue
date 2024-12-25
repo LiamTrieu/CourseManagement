@@ -3,7 +3,7 @@ import classesApi from "@/api/classesApi";
 import studentApi from "@/api/studentApi";
 import ModalForm from "@/components/ModalForm.vue";
 import Pageing from "@/components/Pageing.vue";
-import Table from "@/components/Table.vue";
+import Table from "@/components/TableCustom.vue";
 import { closeModal } from "@/util/bootstraputil";
 import { getUser } from "@/util/userUtil";
 import { onMounted, ref } from "vue";

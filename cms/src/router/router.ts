@@ -18,6 +18,7 @@ import ClassLesson from "@/view/classmanager/ClassLesson.vue";
 import Home from "@/view/website/Home.vue";
 import CourseDetail from "@/view/website/CourseDetail.vue";
 import Mail from "@/view/mailmanager/Mail.vue";
+import Schedule from "@/view/classmanager/Schedule.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -35,12 +36,6 @@ const router = createRouter({
           component: Course,
           name: "course",
           meta: { title: "Quản lý khóa học" },
-        },
-        {
-          path: "/forbidden",
-          component: Forbidden,
-          name: "forbidden",
-          meta: { title: "Không có quyền" },
         },
         {
           path: "/course/:idCourse(\\d+)",
@@ -84,11 +79,11 @@ const router = createRouter({
               component: PointsStudent,
               name: "classPointStudent",
             },
-            // {
-            //   path: "schedule",
-            //   component: Schedule,
-            //   name: "classScheduleStudent",
-            // },
+            {
+              path: "schedule",
+              component: Schedule,
+              name: "classScheduleStudent",
+            },
             {
               path: "lesson",
               component: ClassLesson,
@@ -129,6 +124,12 @@ const router = createRouter({
     {
       path: "/khoa-hoc/:id",
       component: CourseDetail,
+    },
+    {
+      path: "/forbidden",
+      component: Forbidden,
+      name: "forbidden",
+      meta: { title: "Không có quyền" },
     },
   ],
 });

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import Table from "../../components/Table.vue";
+import Table from "../../components/TableCustom.vue";
 import studentApi from "../../api/studentApi";
 import ModalForm from "@/components/ModalForm.vue";
 import StudentForm from "./StudentForm.vue";

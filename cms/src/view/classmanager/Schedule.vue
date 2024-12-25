@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import Table from "@/components/Table.vue";
+import Table from "@/components/TableCustom.vue";
 import { ref } from "vue";
 import { useRoute } from "vue-router";
 import classesApi from "../../api/classesApi";
