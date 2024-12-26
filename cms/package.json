@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@vueup/vue-quill": "^1.2.0",
+    "aos": "^2.3.4",
     "axios": "^1.6.7",
     "moment": "^2.30.1",
     "sweetalert2": "^11.10.6",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.2",
+    "@types/aos": "^3.0.7",
     "@types/node": "^20.11.10",
     "@vitejs/plugin-vue": "^5.0.3",
     "@vue/tsconfig": "^0.5.1",

@@ -28,7 +28,7 @@ function getStudentByClass() {
             })
             .finally(() => {
               lessonClass.value.forEach((e) => {
-                if (e.status > 0 && e.status < 3) {
+                if (e && e.status && e.status > 0 && e.status < 3) {
                   arrEnable.value.push(e.id);
                 }
               });

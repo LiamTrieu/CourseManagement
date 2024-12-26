@@ -10,6 +10,7 @@ import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 
 import { setLoad } from "@/util/load";
+import type { Pageable } from "@/typings/pageable";
 
 const route = useRoute();
 
@@ -33,7 +34,7 @@ function searchStudent() {
       pageable.value.pageNumber,
       pageable.value.size,
       searchText.value,
-      route.params.codeClass
+      route.params.codeClass as string
     )
     .then((response) => {
       students.value = response.data.content;
@@ -87,6 +88,7 @@ function toggleSelection(student: Student) {
       idStudent: student.id,
       nameStudent: student.name,
       codeStudent: student.code,
+      points: {},
     });
   }
 }
@@ -98,6 +100,7 @@ function toggleSelectAll() {
       idStudent: std.id,
       nameStudent: std.name,
       codeStudent: std.code,
+      points: {},
     }));
   }
 }

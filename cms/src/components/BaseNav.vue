@@ -15,6 +15,7 @@ import { closeModal } from "@/util/bootstraputil";
 
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/css/index.css";
+import type { Course } from "@/typings/course";
 const route = useRoute();
 
 const arrRouteCourse = ref<Array<string>>([
@@ -201,7 +202,7 @@ function addStudent() {
               src="../assets/image/avatar.jpg" />
             <div class="user_context">
               {{ getUser()?.name }}
-              <p>{{ roleType(getUser()?.role) }}</p>
+              <p>{{ roleType(getUser()?.role + '') }}</p>
             </div>
           </div>
           <ul class="dropdown-menu">

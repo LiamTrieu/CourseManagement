@@ -10,6 +10,7 @@ import { toast } from "vue3-toastify";
 import Pageing from "@/components/Pageing.vue";
 import type { Lesson } from "@/typings/lesson";
 import { setLoad } from "@/util/load";
+import type { Pageable } from "@/typings/pageable";
 
 const route = useRoute();
 const lessonsClass = ref<Lesson[]>([]);
@@ -101,14 +102,14 @@ function chageStatus(less: Lesson, status: string) {
               <div class="p-3 d-flex flex-row">
                 <span class="badge text-bg-info"
                   ><i class="fa-solid fa-clock"></i>&nbsp;
-                  {{ less.quantity }} buổi</span
+                  {{ less.quantity }} buổi</span>
                 >
                 &nbsp;&nbsp;
                 <select
                   :disabled="getUser()?.role != 'ADMIN'"
                   @change="
                     (e) => {
-                      chageStatus(less, e.target.value);
+                      chageStatus(less, ((e.target as HTMLSelectElement).value || ''));
                     }
                   "
                   class="form-select form-select-sm"

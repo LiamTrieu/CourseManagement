@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import courseApi from "@/api/courseApi";
+import type { Course } from "@/typings/course";
 
 const props = defineProps({
   student: {

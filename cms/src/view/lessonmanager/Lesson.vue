@@ -10,11 +10,14 @@ import { getUser } from "@/util/userUtil";
 import ModalForm from "@/components/ModalForm.vue";
 
 import { setLoad } from "@/util/load";
+import type { Lesson } from "@/typings/lesson";
+import type { Course } from "@/typings/course";
+import type { Pageable } from "@/typings/pageable";
 
 const route = useRoute();
 const lessonsCourse = ref<Lesson[]>([]);
 const lessons = ref<Lesson[]>([]);
-let courseLessonIds = [];
+let courseLessonIds: number[] = [];
 
 const lessonSelect = ref<string[]>([]);
 

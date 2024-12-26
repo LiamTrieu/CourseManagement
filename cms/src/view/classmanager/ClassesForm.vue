@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import teacherApi from "@/api/teacherApi";
+import type { Course } from "@/typings/course";
+import type { Teacher } from "@/typings/teacher";
 import { dayOfWeek } from "@/util/contanst";
 import { dayOfWeekConvert, studyConvert } from "@/util/enumconvert";
-import { ref } from "vue";
+import { ref, type PropType } from "vue";
 
 const props = defineProps({
   classes: {
@@ -14,7 +16,7 @@ const props = defineProps({
     required: true,
   },
   courses: Array<Course>,
-  searchTeacher: Function,
+  searchTeacher: Function as PropType<(event: MouseEvent) => void>,
   error: {
     type: Object,
     required: true,

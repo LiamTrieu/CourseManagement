@@ -11,6 +11,7 @@ import { getUser } from "@/util/userUtil";
 import type { Lesson, LessonError } from "@/typings/lesson";
 import { comfirm } from "@/util/sweetalert";
 import { setLoad } from "@/util/load";
+import type { Pageable } from "@/typings/pageable";
 
 const route = useRoute();
 const lessons = ref<Lesson[]>([]);

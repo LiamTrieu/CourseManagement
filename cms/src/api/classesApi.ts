@@ -1,3 +1,4 @@
+import type { Lesson } from "@/typings/lesson";
 import axiosClient from "./axios";
 
 const classesApi = {

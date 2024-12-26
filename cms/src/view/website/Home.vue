@@ -1,53 +1,9 @@
-<script setup lang="ts">
-import { getUser } from "@/util/userUtil";
-import { onMounted, ref, watch } from "vue";
-import courseApi from "../../api/courseApi";
-import { useRoute, useRouter } from "vue-router";
-
-const router = useRouter();
-const route = useRoute();
-
-const courses = ref<Course[]>([]);
-const pageable = ref<Pageable>({
-  pageNumber: 0,
-  totalPages: 0,
-  totalElements: 0,
-  size: 6,
-});
-
-const searchText = ref<string>("");
-function searchCourse() {
-  courseApi
-    .searchCourse(
-      pageable.value.pageNumber,
-      pageable.value.size,
-      searchText.value
-    )
-    .then((response) => {
-      courses.value = response.data.content;
-      pageable.value = {
-        pageNumber: response.data.pageable.pageNumber,
-        totalPages: response.data.totalPages,
-        totalElements: response.data.totalElements,
-        size: response.data.size,
-      };
-    });
-}
-
-searchCourse();
-
-function nextPage(params: number) {
-  pageable.value.pageNumber = pageable.value.pageNumber + params;
-  searchCourse();
-}
-</script>
-
 <template>
   <div class="content-home">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container">
         <div class="navbar-brand" @click="router.push('/')">
-          <img src="../../assets/image/logo-web.png" />
+          <img class="navbar-brand-img" src="../../assets/image/logo-web.png" /><img class="navbar-brand-text" src="../../assets/image/text-logo-web.png" />
         </div>
         <button
           class="navbar-toggler"
@@ -68,29 +24,30 @@ function nextPage(params: number) {
         </div>
       </div>
     </nav>
-    <div class="container content-container">
+    <div class="container content-container"
+    data-aos-anchor-placement="top-center">
       <div class="hero-content">
-        <h1 class="hero-title mx-3">
+        <h1 class="hero-title mx-3" data-aos="zoom-out">
           Newwave Solutions - Become A Better Developer
         </h1>
-        <p class="hero-text mx-3">
+        <p class="hero-text mx-3" data-aos="zoom-in">
           Newwave Solutions là một trong những công ty hàng đầu cung cấp các
           phần mềm dạng dịch vụ cho các khách hàng thị trường Nhật Bản, thị
           trường Global và trong nước với 12+ năm kinh nghiệm cùng quy mô 300+
           nhân viên.
         </p>
         <div class="d-flex justify-content-center hero-button">
-          <button type="button" class="btn btn-info">Các Khóa Học</button>
+          <button type="button" class="btn btn-info" data-aos="fade-right">Các Khóa Học</button>
           &nbsp; &nbsp; &nbsp; &nbsp;
-          <button type="button" class="btn btn-light">Liên Hệ</button>
+          <button type="button" class="btn btn-light" data-aos="fade-left">Liên Hệ</button>
         </div>
       </div>
-      <div
+      <div data-aos="fade-up"
         class="p-3"
         style="
           background-color: white;
           width: 100%;
-          margin-top: 70px;
+          margin-top: 100px;
           border-radius: 50px;
         ">
         <h1
@@ -99,7 +56,7 @@ function nextPage(params: number) {
           Tại sao bạn nên học với Newwave Solutions
         </h1>
         <div class="row mt-5">
-          <div class="col-lg-6" style="text-align: center">
+          <div class="col-lg-6" style="text-align: center" data-aos="fade-up">
             <img
               src="https://cdn-main.28tech.com.vn/media/anh-khoa-hoc/lo_trinh_khoa_hoc/dai_dien2.png"
               alt="" />
@@ -107,7 +64,7 @@ function nextPage(params: number) {
           <div class="col-lg-6">
             <div class="row mt-5">
               <div class="col-10 d-flex align-items-center" style="width: 100%">
-                <div
+                <div data-aos="fade-right"
                   class="col-2 p-3"
                   style="
                     background-color: #def5fd;
@@ -120,7 +77,7 @@ function nextPage(params: number) {
                     src="https://cdn-main.28tech.com.vn/media/core/icons/chat-luong-cao.png"
                     alt="" />
                 </div>
-                <div style="margin-left: 10px">
+                <div style="margin-left: 10px" data-aos="fade-left">
                   <h3 style="font-size: 18px; font-weight: 700; color: #001c66">
                     Chất lượng cao
                   </h3>
@@ -134,7 +91,7 @@ function nextPage(params: number) {
             </div>
             <div class="row mt-5">
               <div class="col-10 d-flex align-items-center" style="width: 100%">
-                <div
+                <div data-aos="fade-right"
                   class="col-2 p-3"
                   style="
                     background-color: #def5fd;
@@ -147,7 +104,7 @@ function nextPage(params: number) {
                     src="https://cdn-main.28tech.com.vn/media/core/icons/ky-nang-lap-trinh.png"
                     alt="" />
                 </div>
-                <div style="margin-left: 10px">
+                <div style="margin-left: 10px"  data-aos="fade-left">
                   <h3 style="font-size: 18px; font-weight: 700; color: #001c66">
                     Cung cấp nhiều kỹ năng quan trọng
                   </h3>
@@ -161,7 +118,7 @@ function nextPage(params: number) {
             </div>
             <div class="row mt-5">
               <div class="col-10 d-flex align-items-center" style="width: 100%">
-                <div
+                <div data-aos="fade-right"
                   class="col-2 p-3"
                   style="
                     background-color: #def5fd;
@@ -174,7 +131,7 @@ function nextPage(params: number) {
                     src="https://cdn-main.28tech.com.vn/media/core/icons/lap-trinh-vien.png"
                     alt="" />
                 </div>
-                <div style="margin-left: 10px">
+                <div style="margin-left: 10px" data-aos="fade-left">
                   <h3 style="font-size: 18px; font-weight: 700; color: #001c66">
                     Bước chuẩn bị vững chắc của một lập trình viên
                   </h3>
@@ -191,7 +148,7 @@ function nextPage(params: number) {
         <br id="course-list" />
         <div style="margin-top: 100px"></div>
         <div>
-          <h1
+          <h1 data-aos="fade-up"
             class="text-center mb-3"
             style="color: #001c66; font-weight: 600; width: 100%">
             Khóa Học Tại Newwave Solutions
@@ -202,7 +159,7 @@ function nextPage(params: number) {
               style="cursor: pointer"
               v-for="course in courses"
               :key="course.id">
-              <div
+              <div data-aos="zoom-in"
                 class="card p-0 card-course"
                 :title="course.name"
                 style="
@@ -270,7 +227,7 @@ function nextPage(params: number) {
             </div>
           </div>
           <div class="d-flex justify-content-center mt-4">
-            <button
+            <button data-aos="fade-right"
               @click="nextPage(-1)"
               :disabled="pageable.pageNumber == 0"
               type="button"
@@ -278,7 +235,7 @@ function nextPage(params: number) {
               <i class="fa-solid fa-left-long"></i> Trang trước
             </button>
             &nbsp;
-            <button
+            <button data-aos="fade-left"
               :disabled="pageable.totalPages - 1 == pageable.pageNumber"
               type="button"
               class="btn btn-info"
@@ -292,12 +249,12 @@ function nextPage(params: number) {
         <div style="margin-top: 100px"></div>
         <div class="row mb-5">
           <div class="col-lg-6" style="text-align: center">
-            <img
+            <img data-aos="fade-right"
               src="https://cdn-main.28tech.com.vn/media/anh-khoa-hoc/lo_trinh_khoa_hoc/dai_dien1.png"
               alt="" />
           </div>
-          <div class="col-lg-6" style="margin-top: 80px">
-            <h1 style="color: #001c66; font-weight: 600; width: 100%">
+          <div class="col-lg-6" style="margin-top: 80px"  data-aos="fade-left">
+            <h1 style="color: #001c66; font-weight: 600; width: 100%" >
               Về Newwave Solutions
             </h1>
             <p style="color: #6b7385">
@@ -336,7 +293,7 @@ function nextPage(params: number) {
       </div>
       <footer class="footer pb-5">
         <div class="container row">
-          <div class="col-md-9 mb-4">
+          <div class="col-md-9 mb-4" data-aos="zoom-in-up">
             <h4 style="color: #001c66; font-weight: 600; width: 100%">
               Địa chỉ
             </h4>
@@ -350,8 +307,8 @@ function nextPage(params: number) {
               Bunkyo, Thành phố Tokyo 113-0034, Nhật Bản
             </p>
           </div>
-          <div class="col-md-3">
-            <h4 style="color: #001c66; font-weight: 600; width: 100%">
+          <div class="col-md-3" data-aos="zoom-in-up">
+            <h4 style="color: #001c66; font-weight: 600; width: 100%" >
               Liên hệ
             </h4>
             <p style="color: #6b7385" class="mt-4">
@@ -366,9 +323,56 @@ function nextPage(params: number) {
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { getUser } from "@/util/userUtil";
+import { onMounted, ref, watch } from "vue";
+import courseApi from "../../api/courseApi";
+import { useRoute, useRouter } from "vue-router";
+import type { Course } from "@/typings/course";
+import type { Pageable } from "@/typings/pageable";
+
+const router = useRouter();
+const route = useRoute();
+
+const courses = ref<Course[]>([]);
+const pageable = ref<Pageable>({
+  pageNumber: 0,
+  totalPages: 0,
+  totalElements: 0,
+  size: 6,
+});
+
+const searchText = ref<string>("");
+function searchCourse() {
+  courseApi
+    .searchCourse(
+      pageable.value.pageNumber,
+      pageable.value.size,
+      searchText.value
+    )
+    .then((response) => {
+      courses.value = response.data.content;
+      pageable.value = {
+        pageNumber: response.data.pageable.pageNumber,
+        totalPages: response.data.totalPages,
+        totalElements: response.data.totalElements,
+        size: response.data.size,
+      };
+    });
+}
+
+searchCourse();
+
+function nextPage(params: number) {
+  pageable.value.pageNumber = pageable.value.pageNumber + params;
+  searchCourse();
+}
+</script>
+
 <style scoped>
 .content-home {
-  background-image: url("https://cdn-main.28tech.com.vn/media/core/background/hero-bg.jpg");
+  background-image: url("../../assets/image/hero-bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-color: white;
@@ -380,8 +384,19 @@ function nextPage(params: number) {
   box-shadow: none !important;
   height: 70px;
 }
-.navbar-brand img {
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand .navbar-brand-img {
+  height: 50px;
+}
+
+.navbar-brand .navbar-brand-text {
   height: 40px;
+  margin-left: -5px;
 }
 .navbar-nav .nav-link {
   color: white !important;

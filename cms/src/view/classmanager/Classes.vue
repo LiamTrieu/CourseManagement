@@ -17,6 +17,9 @@ import {
 import moment from "moment";
 import { getUser } from "@/util/userUtil";
 import { comfirm } from "@/util/sweetalert";
+import type { Pageable } from "@/typings/pageable";
+import type { Course } from "@/typings/course";
+import type { Teacher } from "@/typings/teacher";
 
 const classess = ref<Classes[]>([]);
 const pageable = ref<Pageable>({
@@ -303,7 +306,7 @@ function searchTeacher() {
                   {{
                     classes.study +
                     " (" +
-                    (classes.study && studyConvert(classes.study)) +
+                    (classes.study && studyConvert(classes.study as number)) +
                     ")"
                   }}</b
                 >
@@ -326,14 +329,14 @@ function searchTeacher() {
                     :style="{
                       width: classes.process + '%',
                     }">
-                    <span v-if="classes.process >= 50"
+                    <span v-if="classes && classes.process && classes.process as number >= 50"
                       >{{
                         `${classes.lessLearn}/${classes.totalLesson} (${classes.process}%)`
                       }}
                     </span>
                   </div>
                   <div
-                    v-if="classes.process < 50"
+                    v-if="classes && classes.process && classes.process as number >= 50"
                     class="progress-bar"
                     style="background-color: #e9ecef; width: 100%">
                     <span

@@ -1,13 +1,4 @@
 <script lang="ts" setup>
-import lessonApi from "@/api/lessonApi";
-import ModalForm from "@/components/ModalForm.vue";
-import { getUser } from "@/util/userUtil";
-import { onMounted, ref } from "vue";
-import draggable from "vuedraggable";
-
-const lessons = ref<Lesson[]>([]);
-
-searchLesson();
 </script>
 
 <template></template>

@@ -18,7 +18,7 @@ function getLessonByClass() {
       })
       .finally(() => {
         classesApi
-          .getPointClassStudentCode("", route.params.codeClass)
+          .getPointClassStudentCode("", route.params.codeClass as string)
           .then((res) => {
             studentClass.value = res.data;
           });
@@ -34,7 +34,7 @@ getLessonByClass();
       <tr v-for="(l, index) in lessonClass" :key="l.id">
         <td>{{ index + 1 }}</td>
         <td>{{ l.name }}</td>
-        <td>{{ studentClass[0].points[l.id] }}</td>
+        <td>{{ studentClass[0].points?.[l.id] }}</td>
         <td>{{ l.quantity }}</td>
         <td>
           {{

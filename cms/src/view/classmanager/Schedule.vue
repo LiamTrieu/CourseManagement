@@ -3,9 +3,10 @@ import Table from "@/components/TableCustom.vue";
 import { ref } from "vue";
 import { useRoute } from "vue-router";
 import classesApi from "../../api/classesApi";
-import moment, { Moment } from "moment";
+import moment, { type Moment } from "moment";
 import { getUser } from "@/util/userUtil";
 import { dayOfWeekConvert, studyConvert } from "@/util/enumconvert";
+import type { Pageable } from "@/typings/pageable";
 
 const headers = ["STT", "Ngày học", "Thời gian", "Giờ học", "Trạng thái"];
 const route = useRoute();
@@ -58,12 +59,13 @@ function searchSchedule() {
 searchSchedule();
 
 function genSchedule() {
-  const quantity = classTime.value.quantity;
-  const lessLearn = classTime.value.lessLearn;
-  let totalLesson = quantity - lessLearn;
+  const quantity = classTime.value?.quantity;
+  const lessLearn = classTime.value?.lessLearn;
+  let totalLesson = (quantity as number) - (lessLearn as number);
   let timeStart = moment();
   while (totalLesson > 0) {
-    for (const day of classTime.value?.dayOfWeek) {
+    if (classTime.value?.dayOfWeek) {
+      for (const day of classTime.value?.dayOfWeek) {
       const schedule = {
         dayOfWeek: day,
         time: timeStart.day(day).startOf("day").toString(),
@@ -79,6 +81,7 @@ function genSchedule() {
       }
     }
     timeStart = timeStart.add(1, "weeks");
+    }
   }
 }
 
@@ -94,7 +97,7 @@ const toDate = ref<Moment>(moment().add(1, "weeks"));
         <input
           @change="
             (e) => {
-              fromDate = moment(e.target.value);
+              fromDate = moment((e.target as HTMLInputElement).value);
             }
           "
           :value="fromDate.format('YYYY-MM-DD')"
@@ -108,7 +111,7 @@ const toDate = ref<Moment>(moment().add(1, "weeks"));
         <input
           @change="
             (e) => {
-              toDate = moment(e.target.value);
+              toDate = moment((e.target as HTMLInputElement).value);
             }
           "
           :value="toDate.format('YYYY-MM-DD')"
@@ -139,7 +142,7 @@ const toDate = ref<Moment>(moment().add(1, "weeks"));
           }}
         </td>
         <td>{{ moment(schedule.time).format("DD/MM/YYYY") }}</td>
-        <td>{{ studyConvert(schedule.study) }}</td>
+        <td>{{ studyConvert(schedule.study as number) }}</td>
         <td v-if="getUser()?.role == 'ADMIN'">
           <span class="badge text-bg-warning"> Lịch Dự kiến</span>
         </td>

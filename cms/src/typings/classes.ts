@@ -4,7 +4,7 @@ interface Classes {
   status: string;
   timeStart: string;
   timeEnd?: string;
-  process?: string;
+  process?: number | string;
   lessLearn?: number;
   maxStudent?: number;
   quantity?: number;
@@ -30,7 +30,7 @@ interface StudentClass {
   idStudent: number;
   codeStudent: string;
   nameStudent: string;
-  points?: Point;
+  points: Point;
   timeStart?: string;
   dayOfWeek?: string[];
   lessLearn?: number;

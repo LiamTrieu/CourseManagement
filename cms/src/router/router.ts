@@ -116,14 +116,17 @@ const router = createRouter({
     {
       path: "/login",
       component: Login,
+      meta: { title: "Đăng nhập" },
     },
     {
       path: "/trang-chu",
       component: Home,
+      meta: { title: "Trang chủ" },
     },
     {
       path: "/khoa-hoc/:id",
       component: CourseDetail,
+      meta: { title: "Chi tiết khóa học" },
     },
     {
       path: "/forbidden",
@@ -138,7 +141,7 @@ router.beforeEach((to, from) => {
   if (typeof to.meta?.title === "string") {
     document.title = to.meta.title;
   } else {
-    document.title = "NWS";
+    document.title = "Liam Courses";
   }
 });
 

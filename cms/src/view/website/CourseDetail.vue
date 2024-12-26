@@ -1,125 +1,9 @@
-<script lang="ts" setup>
-import { useRoute, useRouter } from "vue-router";
-import courseApi from "../../api/courseApi";
-import lessonApi from "../../api/lessonApi";
-import { ref } from "vue";
-import draggable from "vuedraggable";
-import studentApi from "@/api/studentApi";
-import Swal from "sweetalert2";
-
-import { setLoad } from "@/util/load";
-
-const router = useRouter();
-const route = useRoute();
-
-const indexSelect = ref<number>(1);
-
-const course = ref<Course>({
-  id: -1,
-  name: "",
-  description: "",
-});
-const lessons = ref<Lesson[]>([]);
-
-function getCourse(idCourse: number) {
-  courseApi.getCourseId(idCourse).then((res) => {
-    course.value = res.data;
-  });
-}
-
-function getLesson(idCourse: string) {
-  lessonApi.getAllLessonCourse(idCourse).then((res) => {
-    lessons.value = res.data;
-  });
-}
-
-if (typeof route.params.id == "string") {
-  getCourse(parseInt(route.params.id));
-  getLesson(route.params.id);
-}
-const student = ref<Student>({
-  id: -1,
-  code: "",
-  name: "",
-  birthDate: "",
-  email: "",
-  phone: "",
-  gender: "MALE",
-  address: "",
-  status: "",
-  courseId: -1,
-});
-function resetForm() {
-  student.value = {
-    id: -1,
-    code: "",
-    name: "",
-    birthDate: "",
-    email: "",
-    phone: "",
-    gender: "MALE",
-    address: "",
-    status: "",
-  };
-}
-
-function addStudent() {
-  if (typeof route.params.id == "string") {
-    student.value.courseId = parseInt(route.params.id);
-    studentApi.addStudent(student.value).then(() => {
-      Swal.fire({
-        title: "Thành công!",
-        text: "Đăng ký khóa học thành công!",
-        icon: "success",
-      }).then(() => {
-        resetForm();
-      });
-    });
-  }
-}
-
-const courses = ref<Course[]>([]);
-const pageable = ref<Pageable>({
-  pageNumber: 0,
-  totalPages: 0,
-  totalElements: 0,
-  size: 6,
-});
-
-const searchText = ref<string>("");
-function searchCourse() {
-  setLoad(true);
-  courseApi
-    .searchCourse(
-      pageable.value.pageNumber,
-      pageable.value.size,
-      searchText.value
-    )
-    .then((response) => {
-      courses.value = response.data.content;
-      pageable.value = {
-        pageNumber: response.data.pageable.pageNumber,
-        totalPages: response.data.totalPages,
-        totalElements: response.data.totalElements,
-        size: response.data.size,
-      };
-      setLoad(false);
-    });
-}
-
-searchCourse();
-
-function nextPage(params: number) {
-  pageable.value.pageNumber = pageable.value.pageNumber + params;
-  searchCourse();
-}
-</script>
 <template>
   <div class="content-home">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container">
         <div class="navbar-brand" @click="router.push('/')">
-          <img src="../../assets/image/logo-web.png" />
+          <img class="navbar-brand-img" src="../../assets/image/logo-web.png" /><img class="navbar-brand-text" src="../../assets/image/text-logo-web.png" />
         </div>
         <button
           class="navbar-toggler"
@@ -456,6 +340,127 @@ function nextPage(params: number) {
     </div>
   </div>
 </template>
+
+<script lang="ts" setup>
+import { useRoute, useRouter } from "vue-router";
+import courseApi from "../../api/courseApi";
+import lessonApi from "../../api/lessonApi";
+import { ref } from "vue";
+import draggable from "vuedraggable";
+import studentApi from "@/api/studentApi";
+import Swal from "sweetalert2";
+
+import { setLoad } from "@/util/load";
+import type { Course } from "@/typings/course";
+import type { Lesson } from "@/typings/lesson";
+import type { Pageable } from "@/typings/pageable";
+
+const router = useRouter();
+const route = useRoute();
+
+const indexSelect = ref<number>(1);
+
+const course = ref<Course>({
+  id: -1,
+  name: "",
+  description: "",
+});
+const lessons = ref<Lesson[]>([]);
+
+function getCourse(idCourse: number) {
+  courseApi.getCourseId(idCourse).then((res) => {
+    course.value = res.data;
+  });
+}
+
+function getLesson(idCourse: string) {
+  lessonApi.getAllLessonCourse(idCourse).then((res) => {
+    lessons.value = res.data;
+  });
+}
+
+if (typeof route.params.id == "string") {
+  getCourse(parseInt(route.params.id));
+  getLesson(route.params.id);
+}
+const student = ref<Student>({
+  id: -1,
+  code: "",
+  name: "",
+  birthDate: "",
+  email: "",
+  phone: "",
+  gender: "MALE",
+  address: "",
+  status: "",
+  courseId: -1,
+});
+function resetForm() {
+  student.value = {
+    id: -1,
+    code: "",
+    name: "",
+    birthDate: "",
+    email: "",
+    phone: "",
+    gender: "MALE",
+    address: "",
+    status: "",
+  };
+}
+
+function addStudent() {
+  if (typeof route.params.id == "string") {
+    student.value.courseId = parseInt(route.params.id);
+    studentApi.addStudent(student.value).then(() => {
+      Swal.fire({
+        title: "Thành công!",
+        text: "Đăng ký khóa học thành công!",
+        icon: "success",
+      }).then(() => {
+        resetForm();
+      });
+    });
+  }
+}
+
+const courses = ref<Course[]>([]);
+const pageable = ref<Pageable>({
+  pageNumber: 0,
+  totalPages: 0,
+  totalElements: 0,
+  size: 6,
+});
+
+const searchText = ref<string>("");
+function searchCourse() {
+  setLoad(true);
+  courseApi
+    .searchCourse(
+      pageable.value.pageNumber,
+      pageable.value.size,
+      searchText.value
+    )
+    .then((response) => {
+      courses.value = response.data.content;
+      pageable.value = {
+        pageNumber: response.data.pageable.pageNumber,
+        totalPages: response.data.totalPages,
+        totalElements: response.data.totalElements,
+        size: response.data.size,
+      };
+      setLoad(false);
+    });
+}
+
+searchCourse();
+
+function nextPage(params: number) {
+  pageable.value.pageNumber = pageable.value.pageNumber + params;
+  searchCourse();
+}
+</script>
+
 <style scoped>
 .content-home {
   background-image: url("https://cdn-main.28tech.com.vn/media/core/background/bg-image-10.jpg");
@@ -473,8 +478,18 @@ function nextPage(params: number) {
   box-shadow: none !important;
   height: 70px;
 }
-.navbar-brand img {
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand .navbar-brand-img {
+  height: 50px;
+}
+
+.navbar-brand .navbar-brand-text {
   height: 40px;
+  margin-left: -5px;
 }
 .navbar-nav .nav-link {
   color: white !important;
